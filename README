@@ -1,0 +1,10 @@
+This repository contains the Java source for a pair of test tools,
+designed to allow the sending and receiving of PDUs. 
+
+One tool is GUI based and allows the entry of PDU data via a series of
+data entry screens. The other is a batch tool that reads a series of
+instructions from an XML file.
+
+These tools require OpenSMPP and JDOM.
+
+Neil Youngman, 13th January 2011.
