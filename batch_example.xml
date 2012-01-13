@@ -1,0 +1,71 @@
+<!-- SMPP Batch Test example -->
+<Batch>
+    <Connect>
+        <Server port="2775">smsc.example.com</Server>
+    </Connect>
+
+    <Pdu type="BIND_TRANSMITTER">
+        <SystemId>EXAMPLE</SystemId>
+        <SystemType>TESTSMSC</SystemType>
+        <Password>NOTVALID</Password>
+    </Pdu>
+
+    <Pause millis="2000"/>
+
+
+    <!--Pdu type="SUBMIT_SM">
+        <ServiceType>voice</ServiceType>
+        <DestinationAddr>07700900000</DestinationAddr>
+        <ShortMessage>
+            <line>This is a test message.</line>
+        </ShortMessage>
+    </Pdu>
+
+    <Pause millis="200"/-->
+
+    <!-- 2 fragments -->
+    <Pdu type="SUBMIT_SM">
+      <ServiceType>voice</ServiceType>
+      <DestinationAddr>07700900001</DestinationAddr>
+      <EsmClass>64</EsmClass>
+      <ShortMessage>
+        <UserDataHeader ref="234" index="1" total="2"/>
+        <line>This is a test </line>
+      </ShortMessage>
+    </Pdu>
+
+    <Pause millis="200"/>
+
+    <Pdu type="SUBMIT_SM">
+      <ServiceType>voice</ServiceType>
+      <DestinationAddr>07700900001</DestinationAddr>
+      <EsmClass>64</EsmClass>
+      <ShortMessage>
+        <UserDataHeader ref="234" index="2" total="2"/>
+        <line>message.</line>
+      </ShortMessage>
+    </Pdu>
+
+    <Pause millis="30000"/>
+
+    <!-- Turn off auto-responses for 45 seconds -->
+    <Settings noAutoResponse="ENQUIRE_LINK,DELIVER_SM"/>
+
+    <Pause millis="45000"/>
+
+    <!-- Turn on auto-responses for 45 seconds -->
+    <Settings autoResponse="ENQUIRE_LINK,DELIVER_SM"/>
+
+    <Pause millis="45000"/>
+
+    <!-- Turn off auto-responses for 120 seconds -->
+    <Settings noAutoResponse="ENQUIRE_LINK,DELIVER_SM"/>
+
+    <Pause millis="120000"/>
+
+    <Pdu type="UNBIND"/>
+
+    <!-- wait 5 seconds for the unbind response and any other stragglers -->
+    <Pause millis="5000"/>
+
+</Batch>
