@@ -4,28 +4,41 @@ SMPP Test Tools
 1. Introduction
 ---------------
 
+SMPP stands for Short Message Peer-to-peer Protocol. 
+
 This repository contains the Java source for a pair of simple test
-tools, designed to allow the sending and receiving of PDUs.
+tools, designed to allow the sending and receiving of SMPP PDUs. These
+tools are based on the OpenSMPP API.
 
 One tool is GUI based and allows the entry of PDU data via a series of
-data entry screens. The other is a batch tool that reads a series of
-instructions from an XML file.
+data entry screens. The other is a batch tool that sends a scripted
+sequence of PDUs, as specified in an XML file.
 
 
-2. Requirements
+2. Licensing
+------------
+
+This software is released under the GNU General Public License version
+2.0 (https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) or later
+(https://www.gnu.org/licenses/licenses.html).
+
+
+3. Requirements
 ---------------
 
-These tools require Java6, ant, OpenSMPP and JDOM.
+These tools require Java6, ant, OpenSMPP
+(https://www.gnu.org/licenses/licenses.html) and JDOM
+(http://www.jdom.org/).
 
 
-3. Building
+4. Building
 -----------
 
 A build.xml file is provided to build these tools with ant. Suitable
 paths to jdom.jar and OpenSMPP.jar will need to be set.
 
 
-4. The GUI test tool
+5. The GUI test tool
 --------------------
 
 Usage: java -cp "/path/to/OpenSMPP.jar:/path/to/jdom.jar" \
@@ -53,14 +66,12 @@ the main window. Double clicking on a PDU entry opens up a read only
 PDU dialog to display the Contents of the PDU as sent or received.
 
 
-5. The Batch test tool
+6. The Batch test tool
 ----------------------
 
 Usage: java -cp "/path/to/OpenSMPP.jar:/path/to/jdom.jar" \
        uk.org.youngman.smpp.test.batch.BatchClient \
        batch_file.xml batch.log
-
-A simple batch example is provided.
 
 The batch test tool supports scripted SMPP testing. It reads an XML
 file with instructions on where to connect, what PDUs to send, whether
@@ -72,8 +83,12 @@ If it detects any errors while parsing the XML, it will not try to
 continue. The XML is not validated against a schema, so not all
 errors will be detected.
 
+A simple batch example is provided, which will need to be edited to
+your requirements. It is not documented, but I hope it is resonably
+self explanatory, given a basic familiarity with SMPP.
 
-6. Limitations
+
+7. Limitations
 --------------
 
 These tools do not currently provide any way to change the character
