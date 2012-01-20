@@ -62,10 +62,11 @@ Usage: java -cp "/path/to/OpenSMPP.jar:/path/to/jdom.jar" \
 
 A simple batch example is provided.
 
-The batch test tool reads an XML with instructions on where to
-connect, what PDUs to send, whether or not to automatically
-acknowledge ENQUIRE_LINK and DELIVER_SM PDUs and pauses. It writes
-details of all PDUs sent and received to a log file.
+The batch test tool supports scripted SMPP testing. It reads an XML
+file with instructions on where to connect, what PDUs to send, whether
+or not to automatically acknowledge ENQUIRE_LINK and DELIVER_SM PDUs
+and pauses. It writes details of all PDUs sent and received to a log
+file.
 
 If it detects any errors while parsing the XML, it will not try to
 continue. The XML is not validated against a schema, so not all
