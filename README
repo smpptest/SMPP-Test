@@ -1,10 +1,89 @@
-This repository contains the Java source for a pair of test tools,
-designed to allow the sending and receiving of PDUs. 
+SMPP Test Tools
+===============
+
+1. Introduction
+---------------
+
+This repository contains the Java source for a pair of simple test
+tools, designed to allow the sending and receiving of PDUs.
 
 One tool is GUI based and allows the entry of PDU data via a series of
 data entry screens. The other is a batch tool that reads a series of
 instructions from an XML file.
 
-These tools require OpenSMPP and JDOM.
 
-Neil Youngman, 13th January 2011.
+2. Requirements
+---------------
+
+These tools require Java6, ant, OpenSMPP and JDOM.
+
+
+3. Building
+-----------
+
+A build.xml file is provided to build these tools with ant. Suitable
+paths to jdom.jar and OpenSMPP.jar will need to be set.
+
+
+4. The GUI test tool
+--------------------
+
+Usage: java -cp "/path/to/OpenSMPP.jar:/path/to/jdom.jar" \
+       uk.org.youngman.smpp.test.gui.TestClient
+
+This launches a simple window. Clicking the "Connect" button launches
+the connect dialog. Filling in the server details and clicking the
+"Confirm" button connects to the SMSC. Once connected the "Send PDU"
+and "Disconnect" buttons are activated.
+
+The GUI tool can read default connection and login (bind) details from
+file Test.properties, if that is on the class path.
+
+The "Send PDU" button launches a PDU composition dialog. After
+selecting a PDU type the fields can be filled in as required. Sequence
+numbers increment automatically, but can be altered if required.
+
+On the main window there are 2 checkboxes that control whether
+ENQUIRE_LINK and DELIVER_SM PDUs are automatically acknowledged. While
+these checkboxes are selected those PDUs will be acknowledged with the
+status ESME_ROK.
+
+All PDUs sent and received are logged in the log pane in the centre of
+the main window. Double clicking on a PDU entry opens up a read only
+PDU dialog to display the Contents of the PDU as sent or received.
+
+
+5. The Batch test tool
+----------------------
+
+Usage: java -cp "/path/to/OpenSMPP.jar:/path/to/jdom.jar" \
+       uk.org.youngman.smpp.test.batch.BatchClient \
+       batch_file.xml batch.log
+
+A simple batch example is provided.
+
+The batch test tool reads an XML with instructions on where to
+connect, what PDUs to send, whether or not to automatically
+acknowledge ENQUIRE_LINK and DELIVER_SM PDUs and pauses. It writes
+details of all PDUs sent and received to a log file.
+
+If it detects any errors while parsing the XML, it will not try to
+continue. The XML is not validated against a schema, so not all
+errors will be detected.
+
+
+6. Limitations
+--------------
+
+These tools do not currently provide any way to change the character
+sets used from the OpenSMPP defaults without code changes.
+
+There is no way to alter automated responses where these are used or
+to make the response conditional on the contents of the received
+PDU. Automated responses are currently only available for ENQUIRE_LINK
+and DELIVER_SM PDUs.
+
+
+Neil Youngman, 20th January 2011.
+
+smpp@youngman.org.uk
